@@ -1,7 +1,7 @@
 package com.example.np1.controller;
 
 
-import com.example.np1.entity.Post;
+import com.example.np1.dto.PostDto;
 import com.example.np1.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +16,7 @@ public class PostController {
   private final PostService postService;
 
   @GetMapping("/post")
-  public List<Post> getOrder() {
+  public List<PostDto> getOrder() {
     return postService.getPosts();
   }
 }

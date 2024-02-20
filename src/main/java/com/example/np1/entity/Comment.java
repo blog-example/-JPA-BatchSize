@@ -18,7 +18,6 @@ public class Comment {
   @Column(name = "comment")
   private String comment;
 
-  @JsonBackReference
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "post_id")
   private Post post;

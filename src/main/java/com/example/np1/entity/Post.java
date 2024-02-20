@@ -24,7 +24,6 @@ public class Post {
   @Column(name = "content")
   private String content;
 
-  @JsonManagedReference
   @OneToMany(mappedBy = "post")
   private List<Comment> comments = new ArrayList<>();
 
