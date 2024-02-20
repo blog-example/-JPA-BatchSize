@@ -7,3 +7,6 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+    properties:
+      hibernate:
+        default_batch_fetch_size: 7 # 전역 배치 사이즈 설정

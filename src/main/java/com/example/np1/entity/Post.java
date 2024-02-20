@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ public class Post {
   @Column(name = "content")
   private String content;
 
+  @BatchSize(size = 11)
   @OneToMany(mappedBy = "post")
   private List<Comment> comments = new ArrayList<>();
 
