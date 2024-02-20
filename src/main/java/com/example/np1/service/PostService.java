@@ -5,6 +5,8 @@ import com.example.np1.dto.PostDto;
 import com.example.np1.entity.Comment;
 import com.example.np1.entity.Post;
 import com.example.np1.repository.PostRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,15 +19,19 @@ import java.util.List;
 @Service
 public class PostService {
 
+  @PersistenceContext
+  private final EntityManager entityManager;
+
   private final PostRepository postRepository;
 
   public List<PostDto> getPosts() {
-    List<Post> posts = postRepository.findAll(); // N + 1에서 1에 해당
+    String jqpl = "SELECT p FROM Post p JOIN FETCH comments";
+    List<Post> posts = entityManager.createQuery(jqpl, Post.class).getResultList();
 
     List<PostDto> postDtos = new ArrayList<>();
     for (int i = 0; i < posts.size(); i++) {
       Post post = posts.get(i);
-      List<Comment> comments = post.getComments(); // N + 1에서 N에 해당
+      List<Comment> comments = post.getComments();
 
       List<CommentDto> commentDtos = new ArrayList<>();
       for (Comment comment: comments) {
