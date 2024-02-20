@@ -16,3 +16,6 @@
    - JPQL-EM은 service에서 Entity Manager를 사용해서 N + 1을 해결하는 예제
 
 <br />
+
+4. BatchSize ([블로그](https://iwsaitw.tistory.com/entry/N-1-정복하기-4-BatchSize))
+   - @BatchSize를 적용하는 예제
