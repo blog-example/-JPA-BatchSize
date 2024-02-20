@@ -40,4 +40,16 @@ public class PostService {
     return postDtos;
   }
 
+  public PostDto getPost(long id) {
+    Post post = postRepository.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException("no matched post with pid: " + id));
+
+    List<CommentDto> commentDtos = new ArrayList<>();
+    for (Comment comment : post.getComments()) {
+      commentDtos.add(CommentDto.of(comment, post.getPostId()));
+    }
+
+    return PostDto.of(post, commentDtos);
+  }
+
 }
