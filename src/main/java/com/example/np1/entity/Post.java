@@ -24,7 +24,7 @@ public class Post {
   @Column(name = "content")
   private String content;
 
-  @OneToMany(mappedBy = "post")
+  @OneToMany(mappedBy = "post", fetch = FetchType.EAGER)
   private List<Comment> comments = new ArrayList<>();
 
   public void addComment(Comment comment) {
