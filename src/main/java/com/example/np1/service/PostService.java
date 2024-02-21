@@ -5,6 +5,9 @@ import com.example.np1.dto.PostDto;
 import com.example.np1.entity.Comment;
 import com.example.np1.entity.Post;
 import com.example.np1.repository.PostRepository;
+import jakarta.persistence.EntityGraph;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,10 +20,18 @@ import java.util.List;
 @Service
 public class PostService {
 
+  @PersistenceContext
+  private final EntityManager entityManager;
+
   private final PostRepository postRepository;
 
   public List<PostDto> getPosts() {
-    List<Post> posts = postRepository.findAll(); // N + 1에서 1에 해당
+    EntityGraph<Post> graph = entityManager.createEntityGraph(Post.class);
+    graph.addSubgraph(("comments"));
+
+    List<Post> posts = entityManager.createQuery("SELECT p FROM Post p", Post.class)
+            .setHint("javax.persistence.loadgraph", graph)
+            .getResultList();
 
     List<PostDto> postDtos = new ArrayList<>();
     for (int i = 0; i < posts.size(); i++) {
