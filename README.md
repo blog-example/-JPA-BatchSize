@@ -19,3 +19,8 @@
 
 4. BatchSize ([블로그](https://iwsaitw.tistory.com/entry/N-1-정복하기-4-BatchSize))
    - @BatchSize를 적용하는 예제
+
+<br />
+
+5. EntityGraph ([블로그](https://iwsaitw.tistory.com/entry/N-1-%EC%A0%95%EB%B3%B5%ED%95%98%EA%B8%B0-5-Entity-Graph))
+   - EntityGraph 사용예제
