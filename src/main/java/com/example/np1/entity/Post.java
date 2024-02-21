@@ -8,6 +8,11 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@NamedEntityGraph(
+        name = "post-with-comments",  // 이 Graph를 가리키는 id
+        attributeNodes = @NamedAttributeNode("comments") // 연관관계가 있는 필드
+)
 @Getter
 @NoArgsConstructor
 @Entity
